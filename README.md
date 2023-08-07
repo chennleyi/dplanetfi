@@ -32,6 +32,8 @@ node index.js
 ```
 
 发送如下json调用给node服务器创建合约
+
+
 {
 	"projectId": "Jason Borne",
 	"addressList": ["TXRj7wVbxy2wAGHRbo6pML17mcqZJ5uq6p", "TRmVXvNzUj66WEowTMFsbF8a7h7B91GYjD",
@@ -39,11 +41,15 @@ node index.js
  	"percentage": [50, 25, 25] 
 
 }
+
+
 大概等40个区块确认，2min
 终端显示合约创建成功后，转账
 
+
 等待大概20个区块确认，1min
 终端显示收到转账， 调用allocate
+
 
 又大概等待40个区块确认，2min
 终端显示分发成功，完结
