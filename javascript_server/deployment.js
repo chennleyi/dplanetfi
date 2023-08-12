@@ -14,13 +14,9 @@ const tronWeb = new TronWeb({
 const bytecode = process.env.BYTECODE;
 const abi = process.env.ABI;
 
-let projectId
-let addressList;
-let percentage;
-
-
 async function main(res) {
 	// 部署合约
+	const para = req.body;
 	let contract_instance = await tronWeb.contract().new({
 		abi: abi,
 		bytecode: bytecode,
@@ -28,7 +24,7 @@ async function main(res) {
 		callValue: 0,
 		userFeePercentage: 1,
 		originEnergyLimit: 10000000,
-		parameters:[projectId, addressList, percentage]
+		parameters:[para['projectId'], para['addressList'], para['percentage']]
 	});
 	let addr = contract_instance.address;
 	console.log("the sc address is "+addr);
@@ -38,9 +34,6 @@ async function main(res) {
 
 app.post("/allocation", (req, res) => {
 	const request = req.body;
-	projectId = request['projectId'];
-	addressList = request['addressList'];
-	percentage = request['percentage'];
 	main(res);
 })
 
