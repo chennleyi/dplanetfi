@@ -11,9 +11,11 @@ contract learn{
     event eventConstruct(string ID, string projectID);
     event eventAllocate(string ID, string projectID, address indexed from, address indexed to, uint256 value);
 
+
     constructor(string memory _projectID, address payable[] memory _addrs, uint8[] memory _percents){
         _master = payable(0xEb5E992680dF053Cb73ebF34Af076684DF5b969e);
         projectID=_projectID;
+        require(isLegit(_percents) == true, "the percent sum must be 100");
         require(addrs.length == percents.length, "the addrs size must equal to percents' size");
 
         for(uint i = 0; i < _addrs.length; ++i){
@@ -25,6 +27,15 @@ contract learn{
     
     receive() external payable{
     }
+    
+
+    function isLegit(uint8[] memory _percents) internal pure returns(bool){
+        uint sum = 0;
+        for(uint8 i = 0; i < _percents.length; i++){
+            sum += _percents[i];
+        }
+        return sum == 100;
+    }    
     
     
     function isPartners(address addr) public view returns(bool) {

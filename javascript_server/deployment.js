@@ -14,7 +14,7 @@ const tronWeb = new TronWeb({
 const bytecode = process.env.BYTECODE;
 const abi = process.env.ABI;
 
-async function main(res) {
+async function main(res,req) {
 	// 部署合约
 	const para = req.body;
 	let contract_instance = await tronWeb.contract().new({
@@ -34,7 +34,7 @@ async function main(res) {
 
 app.post("/allocation", (req, res) => {
 	const request = req.body;
-	main(res);
+	main(res,req);
 })
 
 
